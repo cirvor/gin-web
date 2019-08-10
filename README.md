@@ -1,2 +1,6 @@
 # gin_web
-To learn Gin
+> To learn Gin
+
+#### Mysql + ORM
+
+#### Redis
