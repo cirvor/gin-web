@@ -3,6 +3,8 @@ package main
 import (
 	"web/route"
 
+	_ "web/task"
+
 	"github.com/gin-gonic/gin"
 )
 
