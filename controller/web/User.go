@@ -2,7 +2,6 @@ package web
 
 import (
 	"log"
-	"net/http"
 	. "web/database"
 	. "web/model"
 	"web/utils"
@@ -28,7 +27,7 @@ func UserIndex(context *gin.Context) {
 		log.Println("====== Bind Error ======")
 		log.Println(bind)
 	}
-	panic(http.ErrBodyNotAllowed)
+	//panic(http.ErrBodyNotAllowed)
 	utils.Success(context, "User 222")
 }
 
@@ -45,9 +44,8 @@ func UserName(context *gin.Context) {
 func UserUpdate(context *gin.Context) {
 	message := context.PostForm("message")
 	nick := context.DefaultPostForm("nick", "name")
-	context.JSON(http.StatusOK, gin.H{
-		"code": http.StatusOK,
-		"msg":  message,
-		"data": nick,
+	utils.Success(context, gin.H{
+		"nick":    nick,
+		"message": message,
 	})
 }
