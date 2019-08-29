@@ -27,6 +27,7 @@ func UserIndex(context *gin.Context) {
 		log.Println("====== Bind Error ======")
 		log.Println(bind)
 	}
+	//panic(http.ErrBodyNotAllowed)
 	context.String(http.StatusOK, "User 222")
 }
 
