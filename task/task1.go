@@ -7,7 +7,7 @@ import (
 	"github.com/jasonlvhit/gocron"
 )
 
-func Task() {
+func Task1() {
 	s := gocron.NewScheduler()
 	s.Every(3).Seconds().Do(run)
 

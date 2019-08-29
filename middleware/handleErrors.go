@@ -3,12 +3,13 @@ package middleware
 import (
 	"errors"
 	"net/http"
+	"web/utils"
 
 	"github.com/gin-gonic/gin"
 )
 
 func HandleErrors() gin.HandlerFunc {
-	return func(c *gin.Context) {
+	return func(context *gin.Context) {
 		defer func() {
 			var err error
 			if r := recover(); r != nil {
@@ -20,11 +21,10 @@ func HandleErrors() gin.HandlerFunc {
 				default:
 					err = errors.New("unknown error")
 				}
-
-				c.String(http.StatusInternalServerError, err.Error())
+				utils.Error(context, http.StatusInternalServerError, err.Error())
 				return
 			}
 		}()
-		c.Next()
+		context.Next()
 	}
 }

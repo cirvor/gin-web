@@ -5,6 +5,7 @@ import (
 	"net/http"
 	. "web/database"
 	. "web/model"
+	"web/utils"
 
 	"github.com/gin-gonic/gin"
 )
@@ -27,17 +28,17 @@ func UserIndex(context *gin.Context) {
 		log.Println("====== Bind Error ======")
 		log.Println(bind)
 	}
-	//panic(http.ErrBodyNotAllowed)
-	context.String(http.StatusOK, "User 222")
+	panic(http.ErrBodyNotAllowed)
+	utils.Success(context, "User 222")
 }
 
 func UserName(context *gin.Context) {
 	name := context.Param("name")
 	var user User
 	Db.First(&user, 1)
-	context.JSON(http.StatusOK, gin.H{
+	utils.Success(context, gin.H{
 		"name": name,
-		"data": user,
+		"user": user,
 	})
 }
 
@@ -45,8 +46,8 @@ func UserUpdate(context *gin.Context) {
 	message := context.PostForm("message")
 	nick := context.DefaultPostForm("nick", "name")
 	context.JSON(http.StatusOK, gin.H{
-		"status":  "posted",
-		"message": message,
-		"nick":    nick,
+		"code": http.StatusOK,
+		"msg":  message,
+		"data": nick,
 	})
 }

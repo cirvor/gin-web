@@ -6,5 +6,5 @@ import (
 
 func init() {
 	log.Println("++++++++++++++++++ task init ++++++++++++++++++++++")
-	go Task()
+	go Task1()
 }

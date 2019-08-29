@@ -18,7 +18,10 @@ func HomeIndex(context *gin.Context) {
 	redis := database.Redis.Get()
 	redis.Do("SET", "name", "HHHHHH")
 
-	context.String(http.StatusOK, "hello, worldfff")
+	context.JSON(http.StatusOK, gin.H{
+		"msg":  "success",
+		"data": "hello, worldfff",
+	})
 }
 
 func HomeTest(context *gin.Context) {
