@@ -46,10 +46,15 @@ func UserName(context *gin.Context) {
 }
 
 func UserUpdate(context *gin.Context) {
-	message := context.PostForm("message")
-	nick := context.DefaultPostForm("nick", "name")
-	utils.Success(context, gin.H{
-		"nick":    nick,
-		"message": message,
-	})
+	phone := context.PostForm("phone")
+	password := context.DefaultPostForm("password", "dddd")
+	var user User
+	err := Db.Where(&User{Phone: phone}).First(&user).Error
+	log.Println(err)
+	if err != nil {
+		utils.Error(context, http.StatusNotFound, "找不到")
+	}
+	user.Password = password
+	Db.Save(&user)
+	utils.Success(context, "")
 }
