@@ -2,6 +2,7 @@ package web
 
 import (
 	"log"
+	"net/http"
 	. "web/database"
 	. "web/model"
 	"web/utils"
@@ -34,7 +35,10 @@ func UserIndex(context *gin.Context) {
 func UserName(context *gin.Context) {
 	name := context.Param("name")
 	var user User
-	Db.First(&user, 1)
+	err := Db.Where(&User{Username: name, Password: "dddd"}).First(&user).Error
+	if err != nil {
+		utils.Error(context, http.StatusNotFound, "找不到")
+	}
 	utils.Success(context, gin.H{
 		"name": name,
 		"user": user,

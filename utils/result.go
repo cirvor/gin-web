@@ -12,6 +12,7 @@ func Success(context *gin.Context, data interface{}) {
 		"msg":  "success",
 		"data": data,
 	})
+	panic("done")
 }
 
 func Error(context *gin.Context, status int, msg string) {
@@ -19,4 +20,5 @@ func Error(context *gin.Context, status int, msg string) {
 		"code": status,
 		"msg":  msg,
 	})
+	panic("done")
 }

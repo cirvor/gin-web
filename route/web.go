@@ -18,8 +18,7 @@ func Web(route *gin.Engine) {
 	user := route.Group("/user", middleware.Middleware1)
 	{
 		user.GET("/", web.UserIndex)
-		user.GET("/hello/:name", web.UserName)
-		user.GET("/name/*name", web.UserName)
+		user.GET("/name/:name", web.UserName)
 		user.POST("/update", web.UserUpdate)
 		user.GET("/welcome", func(context *gin.Context) {
 			firstName := context.DefaultQuery("first_name", "Guest")

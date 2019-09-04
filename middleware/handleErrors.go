@@ -17,6 +17,9 @@ func HandleErrors() gin.HandlerFunc {
 				case error:
 					err = x
 				case string:
+					if x == "done" {
+						return
+					}
 					err = errors.New(x)
 				default:
 					err = errors.New("unknown error")
