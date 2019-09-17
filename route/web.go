@@ -8,6 +8,7 @@ import (
 	"web/controller/web"
 
 	"github.com/gin-gonic/gin"
+	"gopkg.in/olahol/melody.v1"
 )
 
 func Web(route *gin.Engine) {
@@ -26,4 +27,12 @@ func Web(route *gin.Engine) {
 			context.String(http.StatusOK, "Hello %s %s", firstName, lastName)
 		})
 	}
+
+	ws := melody.New()
+	route.GET("/ws", func(c *gin.Context) {
+		ws.HandleRequest(c.Writer, c.Request)
+	})
+	ws.HandleMessage(func(s *melody.Session, msg []byte) {
+		ws.BroadcastOthers(msg, s)
+	})
 }
