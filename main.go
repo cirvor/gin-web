@@ -16,6 +16,7 @@ func main() {
 	engine.Use(middleware.HandleErrors())
 	// 路由
 	route.Web(engine)
+	route.Websocket(engine)
 
 	// 绑定端口并启动应用
 	engine.Run(":9205")
