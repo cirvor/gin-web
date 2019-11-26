@@ -21,6 +21,7 @@ func Websocket(route *gin.Engine) {
 	//处理发送事件
 	ws.HandleMessage(func(s *melody.Session, msg []byte) {
 		ws.BroadcastOthers(msg, s)
+		ws.Close()
 	})
 
 	//处理断开

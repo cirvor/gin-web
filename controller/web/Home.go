@@ -16,6 +16,7 @@ import (
 func HomeIndex(context *gin.Context) {
 
 	redis := database.Redis.Get()
+	defer redis.Close()
 	_, err := redis.Do("SET", "name", "HHHHHH")
 	if err != nil {
 		utils.Error(context, http.StatusBadGateway, "服务器异常")
