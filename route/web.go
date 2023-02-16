@@ -2,18 +2,17 @@ package route
 
 import (
 	"net/http"
-	"web/middleware"
-
 	"web/controller/web"
+	"web/middleware"
 
 	"github.com/gin-gonic/gin"
 )
 
 func Web(route *gin.Engine) {
-
 	// 注册一个路由和处理函数
 	route.GET("/", middleware.Middleware1, web.HomeIndex)
 	route.GET("/get", web.HomeTest)
+
 	user := route.Group("/user", middleware.Middleware1)
 	{
 		user.GET("/", web.UserIndex)
